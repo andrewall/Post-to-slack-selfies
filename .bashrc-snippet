@@ -1,0 +1,8 @@
+git-commit(){
+  slackApiToken="";
+  selfieDirectory=;
+  file=$selfieDirectory/$(date +%y%m%d%H%M%S)_$1.png;  # Remove $1 if you don't want your commit message within the file name
+  imagesnap $file;
+  git commit -m "$1";
+  curl https://slack.com/api/files.upload -F file=@$file -F channels=C09K7JBLG -F token=$slackApiToken;
+}
